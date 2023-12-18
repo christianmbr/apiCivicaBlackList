@@ -6,7 +6,7 @@ async function get(idCivica, userId) {
         // Auth.
         const isAuth = await Auth.findById(userId)
         // Search Civica.
-        const idFound = await Civica.find({ id: idCivica })
+        const idFound = await Civica.find({ CAR_ID: idCivica })
 
         return idFound.length==0 ? false : true
     } catch (err) {

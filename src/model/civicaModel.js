@@ -1,10 +1,20 @@
 import mongoose, { Schema, model } from 'mongoose'
 
 const CivicaBlackList = new Schema({
-  id: {
+  CAR_ID: {
     type: Number,
-    required: true, 
-    unique: true
+    required: true
+  },
+  LRE_STATUS: {
+    type: Number,
+    required: true
+  },
+  LRE_VERSAO: {
+    type: Number
+  },
+  LRE_ID: {
+    type: Number,
+    required: true
   }
 },
 {
