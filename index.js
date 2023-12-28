@@ -2,6 +2,7 @@ import express from 'express'
 import civicaRouter from './src/routes/civicaRouter.js'
 import authRouter from './src/routes/authRouter.js'
 import databaseConection from './src/db/databaseConection.js'
+import authDb from './src/db/authDb.js'
 
 const expressApp = express()
 // Port should be located in env!
@@ -17,3 +18,5 @@ expressApp.use('/api/civica', civicaRouter)
 expressApp.use('/api/auth', authRouter)
 
 expressApp.listen(PORT, () => { console.log('🚀 Server is running in port: '+ PORT) })
+
+await authDb.addAdminIfDoesntExist()

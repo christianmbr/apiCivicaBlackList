@@ -1,12 +1,11 @@
 import mongoose from 'mongoose'
+import config from '../../config.js'
 // 
-const url = 'mongodb://localhost:27017'
+const url = config['mongoURL']
+const mongoConnectConfig = config['mongoConnectConfig']
 
 function connect() {
-    return mongoose.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
+    return mongoose.connect(url, mongoConnectConfig)
 }
 
 export default { connect }

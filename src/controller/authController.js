@@ -1,13 +1,6 @@
 import authDb from '../db/authDb.js'
 
 async function auth(req, res) {
-    // Validar!
-    // console.log(req.body)
-    // if (req.body.hasOwnProperty('name') || req.body.hasOwnProperty('password')){
-    //     console.log('good formed')
-    // } else {
-    //     console.log('bad formed')
-    // }
     const { name, password } = req.body
     const token = await authDb.sigIn(name, password)
     return token 

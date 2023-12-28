@@ -1,8 +1,10 @@
 import Auth from '../model/authModel.js'
 import jwt from 'jsonwebtoken'
-
-const SECRET = 'thisismysecretword@'
-const EXPIRESIN = '60m'
+import config from '../../config.js'
+//
+const SECRET = config['jsonWebTokenPass']
+const EXPIRESIN = config['jsonWebTokenExpiredIn']
+const ADMIN_PASSWORD = config['adminPassword']
 
 async function sigIn(name, password){
     try {
@@ -21,4 +23,21 @@ async function sigIn(name, password){
     }
 }
 
-export default { sigIn }
+async function addAdminIfDoesntExist (){
+    try {
+        const response = await Auth.findOne({ name: 'admin' })
+        if (!response) {
+            const newAdmin = new Auth({
+                name: 'admin',
+                password: await Auth.hashPassword(ADMIN_PASSWORD),
+                token: ''
+            })
+            await newAdmin.save()
+            console.info('Admin user have been created!')
+        }
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
+export default { sigIn, addAdminIfDoesntExist }
